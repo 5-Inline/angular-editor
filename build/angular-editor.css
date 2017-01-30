@@ -102,6 +102,23 @@
         flex: 1; }
   .angular-inline-editor-block {
     cursor: context-menu; }
+  .angular-inline-editor-msg {
+    box-sizing: border-box;
+    font-size: 12px;
+    margin: 8px;
+    opacity: 0;
+    padding: 8px;
+    transition: opacity 250ms ease-out; }
+    .angular-inline-editor-msg.success, .angular-inline-editor-msg.fail {
+      border: 1px solid; }
+    .angular-inline-editor-msg.success {
+      background-color: #B9F6CA;
+      border-color: #00C853;
+      opacity: 1; }
+    .angular-inline-editor-msg.fail {
+      background-color: #FF8A80;
+      border-color: #D50000;
+      opacity: 1; }
   .angular-inline-editor s3upload {
     -ms-flex-align: center;
         align-items: center;
@@ -136,3 +153,9 @@
     opacity: 0; }
   100% {
     opacity: 1; } }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }

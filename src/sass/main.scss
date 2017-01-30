@@ -126,6 +126,32 @@
 		}
 	}
 
+	&-msg {
+		box-sizing: border-box;
+		font-size: 12px;
+		margin: 8px;
+		opacity: 0;
+		padding: 8px;
+		transition: opacity 250ms ease-out;
+
+		&.success,
+		&.fail {
+			border: 1px solid;
+		}
+
+		&.success {
+			background-color: #B9F6CA;
+			border-color: #00C853;
+			opacity: 1;
+		}
+
+		&.fail {
+			background-color: #FF8A80;
+			border-color: #D50000;
+			opacity: 1;
+		}
+	}
+
 	s3upload {
 		align-items: center;
 		background: rgba(0,0,0,0.05);
@@ -169,5 +195,15 @@
 
 	100% {
 		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
 	}
 }
