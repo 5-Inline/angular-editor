@@ -1,0 +1,12 @@
+.idea/
+.sass-cache/
+.tmp/
+.DS_Store
+.netrc
+bower_components/
+node_modules/
+releases/
+test/
+dist/
+*.log
+styles/main.css

@@ -1,0 +1,19 @@
+{
+  "name": "angular-editor",
+  "description": "Inline Content Editor for Angular",
+  "main": "src/angular-editor.js",
+  "authors": [
+    "5 Inline <tmaloney@5inline.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/5-Inline/angular-editor",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}

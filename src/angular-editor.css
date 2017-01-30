@@ -1,0 +1,10 @@
+.angular-inline-editor {
+  background: white;
+  border: 2px solid black;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  max-height: 250px;
+  position: fixed;
+  width: 100%;
+  z-index: 100; }
