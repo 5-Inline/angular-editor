@@ -1,7 +1,7 @@
 {
   "name": "angular-editor",
   "description": "Inline Content Editor for Angular",
-  "version": "0.2",
+  "version": "0.3",
   "main": [
     "build/angular-editor.js",
     "build/angular-editor.css"

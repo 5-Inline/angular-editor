@@ -114551,8 +114551,8 @@ function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $do
 	this.scope = $scope.$new();
 	this.sectionId = null;
 	this.scope.formData = {};
-	this.scope.success = null;
-	this.scope.fail = null;
+	this.scope.$success = null;
+	this.scope.$fail = null;
 	this.inlineEditor = inlineEditor;
 
 	var bodyEl = $document.find('body').eq(0);
@@ -114599,9 +114599,9 @@ function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $do
 	buttonsEl.append(submitEl);
 
 	var messageEl = angular.element('<div>');
-	messageEl.html("{{formData.success || formData.fail}}");
+	messageEl.html("{{formData.$success || formData.$fail}}");
 	messageEl.attr('class','angular-inline-editor-msg');
-	messageEl.attr('ng-class','{"success":formData.success,"fail":formData.fail,"loading":formData.loading}')
+	messageEl.attr('ng-class','{"success":formData.$success,"fail":formData.$fail,"loading":formData.$loading}')
 	formEl.append(messageEl);
 
 	inlineEditor.on('updateData', function (data)
@@ -114614,21 +114614,21 @@ function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $do
 	{
 		_self.scope.isLoading = state;
 		if( state ) {		
-			_self.scope.formData.success = null;
-			_self.scope.formData.fail = null;
+			_self.scope.formData.$success = null;
+			_self.scope.formData.$fail = null;
 		}
 	});
 
 	inlineEditor.on('success', function (msg)
 	{
-		_self.scope.success = msg;
-		_self.scope.formData.success = msg;
+		_self.scope.$success = msg;
+		_self.scope.formData.$success = msg;
 		_self.scope.$digest();
 	});
 
 	inlineEditor.on('fail', function (err)
 	{
-		_self.scope.fail = err;
+		_self.scope.$fail = err;
 		_self.scope.$digest();
 	});
 
@@ -114682,8 +114682,11 @@ function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $do
 			formEl.on('submit', function (evt)
 			{
 				evt.preventDefault();
+console.log( 'submit', _self.scope.formData, _self.sectionId );
 				inlineEditor.updateInitialData( angular.copy(_self.scope.formData) );
-				inlineEditor.submitFn(_self.scope.formData);
+				var updateData = angular.copy(_self.scope.formData)[_self.sectionId];
+				updateData.$id = _self.sectionId;
+				inlineEditor.submitFn(updateData);
 			});
 
 			$compile(formEl)(_self.scope);
@@ -114699,6 +114702,7 @@ function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $do
 			$element.removeClass('editing');
 			_self.scope.formData = angular.copy(inlineEditor.initialData);
 			_self.scope.$apply();
+			_self.sectionId = null;
 		}
 	}
 
