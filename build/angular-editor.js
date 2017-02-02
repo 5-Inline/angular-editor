@@ -114682,9 +114682,9 @@ function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $do
 			formEl.on('submit', function (evt)
 			{
 				evt.preventDefault();
-console.log( 'submit', _self.scope.formData, _self.sectionId );
 				inlineEditor.updateInitialData( angular.copy(_self.scope.formData) );
-				var updateData = angular.copy(_self.scope.formData)[_self.sectionId];
+				var updateData = angular.copy(_self.scope.formData) || {};
+				updateData = updateData[_self.sectionId];
 				updateData.$id = _self.sectionId;
 				inlineEditor.submitFn(updateData);
 			});
