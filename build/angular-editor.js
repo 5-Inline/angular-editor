@@ -114725,7 +114725,9 @@ function inlineEditorDirective (inlineEditor, $document)
 				$controller.scope.formData[sectionId] = {};
 				$controller.initialData[sectionId] = {};
 
-				$elem.addClass('angular-inline-editor-block');
+				if( !$attr['inlineEditorNoblock'] ) {				
+					$elem.addClass('angular-inline-editor-block');
+				}
 
 				$elem.on('click', function (evt)
 				{
