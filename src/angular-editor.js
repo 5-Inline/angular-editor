@@ -302,8 +302,9 @@ function inlineEditorDirective (inlineEditor, $document)
 
 				$elem.addClass('angular-inline-editor-block');
 
-				$elem.on('click', function ()
+				$elem.on('click', function (evt)
 				{
+					evt.preventDefault();
 					$controller.toggle();
 				})
 			}
@@ -369,23 +370,6 @@ function inlineEditorItemDirective ($document, inlineEditor)
 
 			// Determine Input Type
 			switch( $element[0].nodeName ) {
-				case 'H1':
-				case 'H2':
-				case 'H3':
-				case 'H4':
-				case 'H5':
-				case 'H6':
-				case 'P':
-					var element = angular.element('<input>');
-					element.attr('name', itemId);
-					element.attr('class','angular-inline-editor-input');
-					element.attr('ng-model', _key);
-					clone.attr('ng-bind-html', _key);
-					$scope[itemId] = $element.html();
-					data[sectionId][itemId] = $element.html();
-					$controller.inlineEditor.updateData(data);
-					$controller.addElement( addWrapper(element), $element, clone );
-					break;
 				case 'IMG' :
 					var element = angular.element('<input>');
 					element.attr('name', itemId);
@@ -397,6 +381,17 @@ function inlineEditorItemDirective ($document, inlineEditor)
 					$controller.inlineEditor.updateData(data);
 					var upload = $controller.getUpload('editorItem.onUploadSuccess', 'editorItem.onUploadFail', sectionId, itemId);
 					$controller.addElement( addWrapper(element, upload), $element, clone);
+					break;
+				default:
+					var element = angular.element('<input>');
+					element.attr('name', itemId);
+					element.attr('class','angular-inline-editor-input');
+					element.attr('ng-model', _key);
+					clone.attr('ng-bind-html', _key);
+					$scope[itemId] = $element.html();
+					data[sectionId][itemId] = $element.html();
+					$controller.inlineEditor.updateData(data);
+					$controller.addElement( addWrapper(element), $element, clone );
 					break;
 			}
 

@@ -1,6 +1,6 @@
 {
   "name": "angular-editor",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "Inline Content Editor for Angular",
   "main": "index.js",
   "scripts": {
