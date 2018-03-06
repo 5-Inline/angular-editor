@@ -192,7 +192,7 @@ function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $do
 	inlineEditor.on('loading', function (state)
 	{
 		_self.scope.isLoading = state;
-		if( state ) {		
+		if( state ) {
 			_self.scope.formData.$success = null;
 			_self.scope.formData.$fail = null;
 		}
@@ -233,6 +233,10 @@ function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $do
 		} else {
 			_self.visible = !_self.visible;
 		}
+
+		_self.scope.formData.$success = null;
+		_self.scope.formData.$fail = null;
+		_self.scope.$digest();
 
 		// Display (append) form
 		if( _self.visible ) {
@@ -279,9 +283,9 @@ function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $do
 			wrapEl.remove();
 			maskEl.remove();
 			$element.removeClass('editing');
-			_self.scope.formData = angular.copy(inlineEditor.initialData);
+			// _self.scope.formData = angular.copy(inlineEditor.initialData);
 			_self.scope.$apply();
-			_self.sectionId = null;
+			// _self.sectionId = null;
 		}
 	}
 
