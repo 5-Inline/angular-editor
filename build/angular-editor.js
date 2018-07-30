@@ -147709,7 +147709,7 @@ function inlineEditorFactory ()
 inlineEditorController.$inject = ['$scope','$element','$attrs','$parse','$compile','$document','inlineEditor','$timeout'];
 function inlineEditorController ($scope, $element, $attrs, $parse, $compile, $document, inlineEditor, $timeout)
 {
-	if( !inlineEditor.isAuth ) return;
+	// if( !inlineEditor.isAuth ) return;
 	var _self = this;
 	this.visible = false;
 	this.min = false;
@@ -147887,14 +147887,14 @@ function inlineEditorDirective (inlineEditor, $document)
 		link: {
 			pre: function ($scope, $elem, $attr, $controller)
 			{
-				if( !inlineEditor.isAuth ) return;
 				var sectionId = $attr.inlineEditor;
 				if( !sectionId ) return false;
-
+				
 				$controller.sectionId = sectionId;
 				$controller.scope.formData[sectionId] = {};
 				$controller.initialData[sectionId] = {};
-
+				
+				if( !inlineEditor.isAuth ) return;
 				if( !$attr['inlineEditorNoblock'] ) {				
 					$elem.addClass('angular-inline-editor-block');
 				}
@@ -147914,8 +147914,8 @@ function inlineEditorDirective (inlineEditor, $document)
 inlineEditorItemController.$inject = ['$scope','$element','$attrs','$parse','$compile','inlineEditor'];
 function inlineEditorItemController ($scope, $element, $attrs, $parse, $compile, inlineEditor)
 {
-	if( !inlineEditor.isAuth ) return;
 	var $parent = $element.parent().controller('inlineEditor');
+	if( !inlineEditor.isAuth ) return;
 	this.onUploadSuccess = function (data, sectionId, itemId)
 	{
 		$parent.scope.formData[sectionId][itemId] = data.Location;
@@ -147939,7 +147939,6 @@ function inlineEditorItemDirective ($document, inlineEditor)
 		controller: inlineEditorItemController,
 		link: function ($scope, $element, $attrs, $controller)
 		{
-			if( !inlineEditor.isAuth ) return;
 			var itemId = $attrs.editorItem;
 			if( !itemId ) return;
 			var sectionId = $controller.sectionId;
@@ -147991,6 +147990,7 @@ function inlineEditorItemDirective ($document, inlineEditor)
 					$controller.addElement( addWrapper(element), $element, clone );
 					break;
 			}
+			if (!inlineEditor.isAuth) return;
 
 			// Add Element to Form
 			if( element ) {

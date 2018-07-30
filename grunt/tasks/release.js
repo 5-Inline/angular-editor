@@ -7,5 +7,5 @@ module.exports = function (grunt, data)
 	tasks.push('copy:release');
 	tasks.push('string-replace:release');
 
-	grunt.registerTask('rekease',' Build application for production release.', tasks);
+	grunt.registerTask('release',' Build application for production release.', tasks);
 }
